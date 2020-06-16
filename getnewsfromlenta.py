@@ -1,17 +1,9 @@
-import pymongo
-# from pymongo import MongoClient
 import requests
 from lxml import html
 from pprint import pprint
 import re
 
 from update_news import update
-
-
-# client = MongoClient()
-# client = MongoClient('mongodb://localhost:27017/')
-# db = client['geeekbrains']
-# collection_news = db['news']
 
 def pars_lenta(date_now):
     main_link = "https://lenta.ru/"
@@ -25,28 +17,6 @@ def pars_lenta(date_now):
     blocks = dom.xpath(
         "//a/time[@class='g-time']/parent::node() | //span[contains(@class,'g-date')]/span[@class='time']")
 
-
-    # def update_news(news):
-    #     responce = {
-    #         'matched': 0,
-    #         'modified': 0,
-    #         'upserted': 0
-    #     }
-    #     result = collection_news.update_one(news, {'$set': {
-    #         'link': news['link'],
-    #         'text': news['text'],
-    #         'date': news['date'],
-    #         'ad': news['ad'],
-    #         'source_name': news['source_name'],
-    #         'updated': date_now
-    #     }}, upsert=True)
-    #     if result.matched_count != 0:
-    #         responce['matched'] += 1
-    #     if result.modified_count != 0:
-    #         responce['modified'] += 1
-    #     if result.upserted_id != None:
-    #         responce['upserted'] += 1
-    #     return responce
     news_list = []
     for block in blocks:
         # pprint(block)
