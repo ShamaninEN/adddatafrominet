@@ -1,10 +1,6 @@
-import pymongo
-from pymongo import MongoClient
 import requests
 from lxml import html
-from pprint import pprint
 import re
-from datetime import datetime
 from update_news import update
 
 def pars_yandex(date_now):
