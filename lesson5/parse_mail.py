@@ -46,39 +46,23 @@ server_name = driver.find_element_by_id('mailbox:submit')
 server_name.submit()
 time.sleep(2)
 driver.refresh()
-time.sleep(10)
-# driver.send_keys(Keys.END)
-# time.sleep(15)
-links = driver.find_elements_by_xpath('//a[contains(@href, "/inbox/0")]')
-# for link in links:
-#     print(link.get_attribute('href'))
-for link in links:
-    letter = {}
-    try:
-        letter['link'] = link.get_attribute('href')
-    except:
-        print('нету линк')
-    time.sleep(2)
-    articles = links
-    actions = ActionChains(driver)
-    actions.move_to_element(links[-1])
-    actions.perform()
+time.sleep(5)
+
+def show_links():
     links = driver.find_elements_by_xpath('//a[contains(@href, "/inbox/0")]')
-    print(letter)
 
-# link = WebDriverWait(driver, 5).until(
-#     EC.element_to_be_clickable((By.CLASS_NAME,'llc js-tooltip-direction_letter-bottom js-letter-list-item llc_pony-mode llc_normal'))
-# )
-# print(link.get_attribute('href'))
+    last_letter = links[-1]
+    print(last_letter)
+    for link in links:
+        print(link.get_attribute('href'))
+    return last_letter
 
-# time.sleep(15)
-# driver.get('https://e.mail.ru/inbox/')
-# elem = WebDriverWait(driver, 15).until(
-#     EC.element_to_be_clickable((By.ID,'0:15924712301346674112:0'))
-# )
-# elem = driver.find_element_by_id('0:15924712301346674112:0')
-# print(elem.get_attribute('href'))
-
-
-# for link in links:
-#     print(link)
+show_links()
+i = 0
+while True:
+    i +=1
+    articles = driver.find_elements_by_xpath('//a[contains(@href, "/inbox/0")]')
+    actions = ActionChains(driver)
+    actions.move_to_element(show_links())
+    time.sleep(1)
+    actions.perform()
